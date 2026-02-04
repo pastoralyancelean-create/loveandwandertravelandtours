@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkyEscape Travel</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+<h2>SkyEscape ✈️</h2>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#destinations">Destinations</a>
+<a href="#booking">Book Flight</a>
+<a href="#contact">Contact</a>
+<a onclick="openLogin()">Login</a>
+</nav>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero">
+<h1>Explore The World</h1>
+<p>Airplane Booking + Tourist Adventures</p>
+<button onclick="scrollBooking()">Book Now</button>
+</section>
+
+<!-- DESTINATIONS -->
+<section id="destinations" class="section">
+
+<h2>Popular Destinations</h2>
+
+<div class="cards">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4">
+<h3>Japan</h3>
+<p>₱15,000</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1526481280691-781ce72f8d5e">
+<h3>Singapore</h3>
+<p>₱8,000</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07">
+<h3>Cebu</h3>
+<p>₱3,500</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1518684079-3c830dcef090">
+<h3>Palawan</h3>
+<p>₱4,500</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
+<h3>Maldives</h3>
+<p>₱20,000</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- BOOKING -->
+<section id="booking" class="section">
+
+<h2>Book Flight</h2>
+
+<form id="bookingForm">
+
+<input type="text" placeholder="Full Name" required>
+
+<select id="destination">
+<option value="">Choose Destination</option>
+<option value="Cebu">Cebu</option>
+<option value="Singapore">Singapore</option>
+<option value="Japan">Japan</option>
+<option value="Palawan">Palawan</option>
+<option value="Maldives">Maldives</option>
+</select>
+
+<p id="priceDisplay">Price: ₱0</p>
+
+<button type="submit">Confirm Booking</button>
+
+</form>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+
+<h2>Contact Us</h2>
+<p>Email: skyescape@email.com</p>
+
+<iframe src="https://maps.google.com/maps?q=NAIA%20Airport&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+
+</section>
+
+<!-- LOGIN -->
+<div id="loginModal" class="modal">
+
+<div class="modal-content">
+
+<span class="close" onclick="closeLogin()">×</span>
+
+<h2>Email Login</h2>
+
+<input type="email" id="emailInput" placeholder="Enter Email">
+<button onclick="sendOTP()">Send Code</button>
+
+<div id="otpSection">
+<input type="text" id="otpInput" placeholder="Enter Code">
+<button onclick="verifyOTP()">Login</button>
+</div>
+
+<p id="otpDisplay"></p>
+
+</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+
