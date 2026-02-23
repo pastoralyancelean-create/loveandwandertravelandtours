@@ -10,14 +10,20 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 <link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 *{
 box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 body{
 scroll-behavior:smooth;
+font-family:'Poppins', sans-serif;
+background:#ffffff;
+overflow-x:hidden;
 }
 
 /* HERO VIDEO */
@@ -29,38 +35,43 @@ width:100%;
 height:100%;
 object-fit:cover;
 z-index:-2;
-filter:brightness(0.7);
+filter:brightness(0.6);
 }
 
 .hero-overlay{
-background:linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+background:linear-gradient(135deg, rgba(37,99,235,0.7) 0%, rgba(139,92,246,0.6) 50%, rgba(236,72,153,0.7) 100%);
 position:absolute;
 top:0;
 left:0;
 width:100%;
 height:100%;
 z-index:-1;
+animation:gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift{
+0%, 100%{background:linear-gradient(135deg, rgba(37,99,235,0.7) 0%, rgba(139,92,246,0.6) 50%, rgba(236,72,153,0.7) 100%);}
+50%{background:linear-gradient(135deg, rgba(236,72,153,0.7) 0%, rgba(37,99,235,0.6) 50%, rgba(139,92,246,0.7) 100%);}
+}
+
+/* FLOATING ANIMATION */
+@keyframes float{
+0%, 100%{transform:translateY(0px);}
+50%{transform:translateY(-20px);}
+}
+
+.float-animation{
+animation:float 6s ease-in-out infinite;
 }
 
 /* SMOOTH TRANSITIONS */
 a{
-transition:all 0.3s ease;
+transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 a:hover{
 color:#2563eb;
-}
-
-/* LOADING SKELETON */
-.skeleton{
-background:linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-background-size:200% 100%;
-animation:loading 1.5s infinite;
-}
-
-@keyframes loading{
-0%{background-position:200% 0;}
-100%{background-position:-200% 0;}
+transform:translateY(-2px);
 }
 
 /* SCROLL TO TOP BUTTON */
@@ -68,10 +79,10 @@ animation:loading 1.5s infinite;
 position:fixed;
 bottom:2rem;
 right:2rem;
-background:#2563eb;
+background:linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
 color:white;
-width:3rem;
-height:3rem;
+width:3.5rem;
+height:3.5rem;
 border-radius:50%;
 display:flex;
 align-items:center;
@@ -79,9 +90,11 @@ justify-content:center;
 cursor:pointer;
 opacity:0;
 visibility:hidden;
-transition:all 0.3s ease;
+transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 z-index:100;
-box-shadow:0 4px 12px rgba(0,0,0,0.2);
+box-shadow:0 8px 24px rgba(37,99,235,0.4);
+font-size:1.5rem;
+font-weight:bold;
 }
 
 .scroll-top.visible{
@@ -90,88 +103,208 @@ visibility:visible;
 }
 
 .scroll-top:hover{
-transform:translateY(-5px);
-box-shadow:0 6px 16px rgba(0,0,0,0.3);
+transform:translateY(-8px) scale(1.1);
+box-shadow:0 12px 32px rgba(37,99,235,0.6);
 }
 
 /* ENHANCED GALLERY HOVER */
 .gallery-item{
 position:relative;
 overflow:hidden;
+border-radius:1.5rem;
 }
 
-.gallery-item::after{
+.gallery-item::before{
 content:'';
 position:absolute;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(37,99,235,0.3);
+background:linear-gradient(135deg, rgba(37,99,235,0.8) 0%, rgba(236,72,153,0.8) 100%);
 opacity:0;
-transition:opacity 0.3s ease;
+transition:opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+z-index:1;
 }
 
-.gallery-item:hover::after{
+.gallery-item:hover::before{
 opacity:1;
+}
+
+.gallery-item img{
+transition:transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-item:hover img{
+transform:scale(1.15) rotate(2deg);
+}
+
+/* DESTINATION CARD ENHANCEMENTS */
+.destination-card{
+position:relative;
+overflow:hidden;
+transition:all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.destination-card::before{
+content:'';
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+background:linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+transition:left 0.7s;
+z-index:10;
+}
+
+.destination-card:hover::before{
+left:100%;
+}
+
+.destination-card:hover{
+transform:translateY(-12px);
+box-shadow:0 20px 40px rgba(37,99,235,0.3);
+}
+
+/* GRADIENT TEXT */
+.gradient-text{
+background:linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #ec4899 100%);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+background-clip:text;
+animation:gradientMove 5s ease infinite;
+background-size:200% auto;
+}
+
+@keyframes gradientMove{
+0%, 100%{background-position:0% center;}
+50%{background-position:100% center;}
+}
+
+/* PULSE ANIMATION */
+@keyframes pulse{
+0%, 100%{transform:scale(1);}
+50%{transform:scale(1.05);}
+}
+
+.pulse-animation{
+animation:pulse 3s ease-in-out infinite;
+}
+
+/* SHIMMER EFFECT */
+@keyframes shimmer{
+0%{background-position:-1000px 0;}
+100%{background-position:1000px 0;}
+}
+
+.shimmer{
+background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+background-size:1000px 100%;
+animation:shimmer 3s infinite;
+}
+
+/* NAVBAR GLASS EFFECT */
+.glass-effect{
+background:rgba(255,255,255,0.95);
+backdrop-filter:blur(20px);
+-webkit-backdrop-filter:blur(20px);
+border-bottom:1px solid rgba(255,255,255,0.3);
+}
+
+/* CONTACT CARD HOVER */
+.contact-card{
+transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-card:hover{
+transform:translateX(8px);
+box-shadow:0 12px 28px rgba(37,99,235,0.2);
+border-left:4px solid #2563eb;
+}
+
+/* BUTTON GLOW */
+.btn-glow{
+position:relative;
+overflow:hidden;
+}
+
+.btn-glow::after{
+content:'';
+position:absolute;
+top:50%;
+left:50%;
+width:0;
+height:0;
+border-radius:50%;
+background:rgba(255,255,255,0.5);
+transform:translate(-50%, -50%);
+transition:width 0.6s, height 0.6s;
+}
+
+.btn-glow:hover::after{
+width:300px;
+height:300px;
 }
 </style>
 </head>
 
-<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-white transition">
+<body class="bg-white text-slate-900">
 
 <!-- NAVBAR -->
-<header class="fixed w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md z-50 shadow-md transition-all duration-300" id="navbar">
-<div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+<header class="fixed w-full glass-effect z-50 shadow-lg transition-all duration-500" id="navbar">
+<div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
 
-<div class="flex items-center gap-3">
-<img src="logo.jpg" alt="Love and WandeR Logo" class="w-10 h-10 rounded-full object-cover" loading="lazy">
-<h1 class="font-bold text-lg md:text-xl">Love and WandeR Travel and Tours</h1>
+<div class="flex items-center gap-3 float-animation">
+<img src="logo.jpg" alt="Love and WandeR Logo" class="w-12 h-12 rounded-full object-cover shadow-lg ring-2 ring-blue-500 ring-offset-2" loading="lazy">
+<h1 class="font-bold text-xl md:text-2xl gradient-text">Love and WandeR</h1>
 </div>
 
 <!-- DESKTOP MENU -->
-<nav class="hidden md:flex gap-8 font-semibold" aria-label="Main navigation">
-<a href="#home" class="hover:text-blue-600">Home</a>
-<a href="#destinations" class="hover:text-blue-600">Destinations</a>
-<a href="#gallery" class="hover:text-blue-600">Gallery</a>
-<a href="#contact" class="hover:text-blue-600">Contact</a>
+<nav class="hidden md:flex gap-10 font-semibold text-lg" aria-label="Main navigation">
+<a href="#home" class="relative group">
+Home
+<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 group-hover:w-full transition-all duration-300"></span>
+</a>
+<a href="#destinations" class="relative group">
+Destinations
+<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 group-hover:w-full transition-all duration-300"></span>
+</a>
+<a href="#gallery" class="relative group">
+Gallery
+<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 group-hover:w-full transition-all duration-300"></span>
+</a>
+<a href="#contact" class="relative group">
+Contact
+<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 group-hover:w-full transition-all duration-300"></span>
+</a>
 </nav>
-
-<div class="flex items-center gap-3">
-
-<!-- DARK MODE -->
-<button onclick="toggleDarkMode()" 
-aria-label="Toggle dark mode"
-class="bg-slate-200 dark:bg-slate-700 px-3 py-2 rounded-lg hover:scale-110 transition">
-<span id="darkModeIcon">🌙</span>
-</button>
 
 <!-- MOBILE MENU BUTTON -->
 <button onclick="toggleMenu()" 
 aria-label="Toggle mobile menu"
 aria-expanded="false"
 id="menuButton"
-class="md:hidden text-2xl hover:text-blue-600 transition">
+class="md:hidden text-3xl hover:text-blue-600 transition transform hover:scale-110">
 ☰
 </button>
 
 </div>
-</div>
 
 <!-- MOBILE MENU -->
 <nav id="mobileMenu"
-class="hidden md:hidden bg-white dark:bg-slate-900 px-6 pb-4 space-y-3"
+class="hidden md:hidden bg-white/95 backdrop-blur-lg px-6 pb-6 space-y-4 border-t border-gray-200"
 aria-label="Mobile navigation">
-<a href="#home" class="block py-2 hover:text-blue-600" onclick="toggleMenu()">Home</a>
-<a href="#destinations" class="block py-2 hover:text-blue-600" onclick="toggleMenu()">Destinations</a>
-<a href="#gallery" class="block py-2 hover:text-blue-600" onclick="toggleMenu()">Gallery</a>
-<a href="#contact" class="block py-2 hover:text-blue-600" onclick="toggleMenu()">Contact</a>
+<a href="#home" class="block py-3 text-lg font-semibold hover:text-blue-600 hover:pl-4 transition-all" onclick="toggleMenu()">Home</a>
+<a href="#destinations" class="block py-3 text-lg font-semibold hover:text-blue-600 hover:pl-4 transition-all" onclick="toggleMenu()">Destinations</a>
+<a href="#gallery" class="block py-3 text-lg font-semibold hover:text-blue-600 hover:pl-4 transition-all" onclick="toggleMenu()">Gallery</a>
+<a href="#contact" class="block py-3 text-lg font-semibold hover:text-blue-600 hover:pl-4 transition-all" onclick="toggleMenu()">Contact</a>
 </nav>
 
 </header>
 
 <!-- HERO VIDEO -->
-<section id="home" class="relative pt-40 pb-40 text-center text-white min-h-screen flex items-center justify-center">
+<section id="home" class="relative text-center text-white min-h-screen flex items-center justify-center">
 
 <video autoplay muted loop playsinline class="hero-video" aria-hidden="true">
 <source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-tropical-island-5175/1080p.mp4" type="video/mp4">
@@ -180,39 +313,68 @@ Your browser does not support the video tag.
 
 <div class="hero-overlay" aria-hidden="true"></div>
 
-<div class="relative z-10 px-6">
-<h2 class="text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg" data-aos="fade-up">
-Explore The World
+<div class="relative z-10 px-6 max-w-5xl mx-auto">
+<div class="mb-6" data-aos="zoom-in" data-aos-duration="1000">
+<span class="inline-block bg-white/20 backdrop-blur-md px-6 py-2 rounded-full text-sm font-semibold tracking-wider border border-white/30">
+✈️ PREMIUM TRAVEL EXPERIENCES
+</span>
+</div>
+
+<h2 class="text-6xl md:text-8xl font-extrabold mb-8 drop-shadow-2xl leading-tight" 
+data-aos="fade-up" 
+data-aos-duration="1200"
+style="text-shadow: 0 0 40px rgba(0,0,0,0.5);">
+Explore The World<br>
+<span class="text-5xl md:text-7xl bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 bg-clip-text text-transparent">
+With Love & Wonder
+</span>
 </h2>
 
-<p class="max-w-2xl mx-auto text-lg md:text-xl opacity-90 mb-8 drop-shadow" data-aos="fade-up" data-aos-delay="200">
-Travel with Love and WandeR and discover amazing destinations around the globe.
+<p class="max-w-3xl mx-auto text-xl md:text-2xl mb-12 drop-shadow-lg font-light leading-relaxed" 
+data-aos="fade-up" 
+data-aos-delay="200"
+data-aos-duration="1200">
+Discover breathtaking destinations, create unforgettable memories, and embark on the adventure of a lifetime.
 </p>
 
+<div class="flex flex-col sm:flex-row gap-6 justify-center items-center" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1200">
 <a href="#destinations" 
-class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:scale-105 transition"
-data-aos="fade-up" 
-data-aos-delay="400">
-Start Your Journey
+class="btn-glow relative inline-block bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-10 py-5 rounded-full font-bold text-lg shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 transform hover:scale-110">
+🌍 Explore Destinations
 </a>
+
+<a href="#contact" 
+class="btn-glow relative inline-block bg-white/20 backdrop-blur-md hover:bg-white/30 text-white px-10 py-5 rounded-full font-bold text-lg border-2 border-white/50 shadow-2xl transition-all duration-300 transform hover:scale-110">
+📞 Contact Us
+</a>
+</div>
 </div>
 
 </section>
 
 <!-- DESTINATIONS -->
-<section id="destinations" class="py-24 bg-gradient-to-b from-white to-gray-50 dark:from-slate-950 dark:to-slate-900">
-<div class="max-w-7xl mx-auto px-6">
+<section id="destinations" class="py-32 bg-gradient-to-b from-white via-blue-50 to-purple-50 relative overflow-hidden">
 
-<h2 class="text-4xl md:text-5xl font-bold text-center mb-4" data-aos="fade-up">
+<!-- DECORATIVE ELEMENTS -->
+<div class="absolute top-20 left-10 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+<div class="absolute bottom-20 right-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style="animation-delay: 2s;"></div>
+
+<div class="max-w-7xl mx-auto px-6 relative z-10">
+
+<div class="text-center mb-20">
+<span class="inline-block text-blue-600 font-bold text-sm tracking-widest mb-4" data-aos="fade-down">
+✨ DISCOVER YOUR NEXT ADVENTURE
+</span>
+<h2 class="text-5xl md:text-7xl font-extrabold mb-6 gradient-text" data-aos="fade-up" data-aos-duration="1000">
 Popular Destinations
 </h2>
-
-<p class="text-center text-gray-600 dark:text-gray-400 mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-Handpicked destinations for your next adventure. Book now and create unforgettable memories.
+<p class="text-center text-gray-600 text-lg md:text-xl mb-8 max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+Handpicked destinations curated just for you. From tropical paradises to cultural wonders, your dream vacation awaits.
 </p>
+</div>
 
 <div id="destinationGrid"
-class="grid md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
+class="grid md:grid-cols-2 lg:grid-cols-3 gap-12"></div>
 
 </div>
 </section>
@@ -279,80 +441,95 @@ loading="lazy">
 </section>
 
 <!-- CONTACT WITH EXACT MAP -->
-<section id="contact" class="py-24 bg-gradient-to-b from-white to-blue-50 dark:from-slate-950 dark:to-slate-900">
-<div class="max-w-7xl mx-auto px-6">
+<section id="contact" class="py-32 bg-gradient-to-b from-white via-blue-50 to-purple-50 relative overflow-hidden">
 
-<h2 class="text-4xl md:text-5xl font-bold text-center mb-4" data-aos="fade-up">
+<!-- DECORATIVE ELEMENTS -->
+<div class="absolute top-20 left-20 w-80 h-80 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+<div class="absolute bottom-20 right-20 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style="animation-delay: 2s;"></div>
+
+<div class="max-w-7xl mx-auto px-6 relative z-10">
+
+<div class="text-center mb-20">
+<span class="inline-block text-blue-600 font-bold text-sm tracking-widest mb-4" data-aos="fade-down">
+💬 LET'S START YOUR JOURNEY
+</span>
+<h2 class="text-5xl md:text-7xl font-extrabold mb-6 gradient-text" data-aos="fade-up" data-aos-duration="1000">
 Contact Us
 </h2>
-
-<p class="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-Ready to start your adventure? Get in touch with us today!
-</p>
-
-<div class="grid md:grid-cols-2 gap-10">
-
-<div class="space-y-6" data-aos="fade-right">
-
-<div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
-<p class="flex items-start gap-3 text-lg">
-<span class="text-2xl">📍</span>
-<span>GF Skyport Hotel, NAIA Road, Parañaque City</span>
+<p class="text-center text-gray-600 text-lg md:text-xl mb-8 max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+Ready to embark on your dream adventure? Get in touch with us today and let's plan your perfect getaway together.
 </p>
 </div>
 
-<div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
-<p class="flex items-center gap-3 text-lg">
-<span class="text-2xl">📧</span>
-<span>
+<div class="grid md:grid-cols-2 gap-12">
+
+<div class="space-y-6" data-aos="fade-right" data-aos-duration="1000">
+
+<div class="contact-card bg-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500">
+<div class="flex items-start gap-4">
+<div class="text-4xl bg-gradient-to-br from-blue-500 to-purple-600 p-4 rounded-2xl shadow-lg">📍</div>
+<div>
+<h3 class="font-bold text-xl mb-2 text-gray-800">Our Location</h3>
+<p class="text-gray-600 leading-relaxed">GF Skyport Hotel, NAIA Road, Parañaque City</p>
+</div>
+</div>
+</div>
+
+<div class="contact-card bg-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500">
+<div class="flex items-start gap-4">
+<div class="text-4xl bg-gradient-to-br from-pink-500 to-purple-600 p-4 rounded-2xl shadow-lg">📧</div>
+<div>
+<h3 class="font-bold text-xl mb-2 text-gray-800">Email Us</h3>
 <a href="mailto:loveandwander2@gmail.com"
-class="text-blue-600 hover:underline">
+class="text-blue-600 hover:text-purple-600 font-semibold transition-colors">
 loveandwander2@gmail.com
 </a>
-</span>
-</p>
+</div>
+</div>
 </div>
 
-<div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
-<p class="flex items-center gap-3 text-lg">
-<span class="text-2xl">📞</span>
-<span>
+<div class="contact-card bg-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500">
+<div class="flex items-start gap-4">
+<div class="text-4xl bg-gradient-to-br from-green-500 to-blue-600 p-4 rounded-2xl shadow-lg">📞</div>
+<div>
+<h3 class="font-bold text-xl mb-2 text-gray-800">Call Us</h3>
 <a href="tel:+639603384925"
-class="text-blue-600 hover:underline">
+class="text-blue-600 hover:text-purple-600 font-semibold transition-colors block">
 +63 960-338-4925
 </a>
-</span>
-</p>
+</div>
+</div>
 </div>
 
-<div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
-<p class="flex items-center gap-3 text-lg font-semibold">
-<span class="text-2xl">☎</span>
-<span>
+<div class="contact-card bg-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500">
+<div class="flex items-start gap-4">
+<div class="text-4xl bg-gradient-to-br from-yellow-500 to-orange-600 p-4 rounded-2xl shadow-lg">☎</div>
+<div>
+<h3 class="font-bold text-xl mb-2 text-gray-800">Telephone</h3>
 <a href="tel:87728272"
-class="text-blue-600 hover:underline">
+class="text-blue-600 hover:text-purple-600 font-semibold transition-colors">
 8-772-8272
 </a>
-</span>
-</p>
+</div>
+</div>
 </div>
 
 <a href="https://www.facebook.com/loveandwander30"
 target="_blank"
 rel="noopener noreferrer"
-class="inline-flex items-center justify-center gap-2 w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-xl font-semibold shadow-lg hover:scale-105 transition">
-<span class="text-xl">📘</span>
+class="btn-glow relative inline-flex items-center justify-center gap-3 w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-6 rounded-2xl font-bold text-lg shadow-2xl hover:shadow-blue-500/50 transition-all duration-500 transform hover:scale-105">
+<span class="text-2xl">📘</span>
 Visit our Facebook Page
 </a>
 
 </div>
 
 <!-- EXACT GOOGLE MAP -->
-<div class="rounded-3xl overflow-hidden shadow-2xl" data-aos="fade-left">
+<div class="rounded-3xl overflow-hidden shadow-2xl" data-aos="fade-left" data-aos-duration="1000">
 <iframe
 src="https://www.google.com/maps?q=14.5207,120.9920&z=17&output=embed"
 width="100%"
-height="500"
+height="650"
 style="border:0;"
 loading="lazy"
 allowfullscreen
@@ -366,12 +543,25 @@ title="Love and WandeR Office Location">
 </section>
 
 <!-- FOOTER -->
-<footer class="py-10 text-center bg-slate-100 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
-<div class="max-w-7xl mx-auto px-6">
-<p class="opacity-70 mb-2">
+<footer class="py-12 text-center bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
+
+<!-- DECORATIVE STARS -->
+<div class="absolute inset-0 opacity-20">
+<div class="absolute top-10 left-10 text-2xl animate-pulse">✨</div>
+<div class="absolute top-20 right-20 text-xl animate-pulse" style="animation-delay: 1s;">⭐</div>
+<div class="absolute bottom-10 left-1/4 text-3xl animate-pulse" style="animation-delay: 2s;">🌟</div>
+<div class="absolute bottom-20 right-1/3 text-xl animate-pulse" style="animation-delay: 1.5s;">✨</div>
+</div>
+
+<div class="max-w-7xl mx-auto px-6 relative z-10">
+<div class="mb-4">
+<h3 class="text-2xl font-bold mb-2 gradient-text">Love and WandeR</h3>
+<p class="text-gray-300 text-sm">Your Gateway to Unforgettable Adventures</p>
+</div>
+<p class="text-gray-400 mb-2">
 © 2026 Love and WandeR Travel and Tours. All rights reserved.
 </p>
-<p class="text-sm opacity-60">
+<p class="text-sm text-gray-500">
 Made with ❤️ for travelers worldwide
 </p>
 </div>
@@ -464,31 +654,12 @@ Travel Price: ${x.price}
 </html>
 
 <script>
-// Initialize AOS animations
+// Initialize AOS animations with enhanced settings
 AOS.init({
-duration: 800,
+duration: 1200,
 once: true,
-offset: 100
-});
-
-/* DARK MODE WITH PERSISTENCE */
-function toggleDarkMode(){
-const html = document.documentElement;
-const isDark = html.classList.toggle("dark");
-localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
-
-// Update icon
-const icon = document.getElementById('darkModeIcon');
-icon.textContent = isDark ? '☀️' : '🌙';
-}
-
-// Load dark mode preference
-window.addEventListener('DOMContentLoaded', () => {
-const darkMode = localStorage.getItem('darkMode');
-if (darkMode === 'enabled') {
-document.documentElement.classList.add('dark');
-document.getElementById('darkModeIcon').textContent = '☀️';
-}
+offset: 100,
+easing: 'ease-out-cubic'
 });
 
 /* MOBILE MENU */
@@ -507,10 +678,13 @@ behavior: 'smooth'
 });
 }
 
-// Show/hide scroll to top button
+// Show/hide scroll to top button with smooth transition
+let scrollTimeout;
 window.addEventListener('scroll', () => {
 const scrollBtn = document.getElementById('scrollTopBtn');
-if (window.scrollY > 300) {
+clearTimeout(scrollTimeout);
+
+if (window.scrollY > 400) {
 scrollBtn.classList.add('visible');
 } else {
 scrollBtn.classList.remove('visible');
@@ -523,10 +697,12 @@ window.addEventListener('scroll', () => {
 const navbar = document.getElementById('navbar');
 const currentScroll = window.scrollY;
 
-if (currentScroll > 100) {
-navbar.classList.add('shadow-xl');
+if (currentScroll > 50) {
+navbar.style.padding = '1rem 0';
+navbar.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
 } else {
-navbar.classList.remove('shadow-xl');
+navbar.style.padding = '1.25rem 0';
+navbar.style.boxShadow = '0 4px 6px rgba(0,0,0,0.05)';
 }
 
 lastScroll = currentScroll;
@@ -537,73 +713,93 @@ const destinations = [
 {
 name:"Japan",
 price:"₱45,000",
-desc:"Cherry blossoms and culture.",
+desc:"Experience cherry blossoms, ancient temples, and modern culture.",
 img:"https://images.unsplash.com/photo-1549693578-d683be217e58",
-duration:"5 Days / 4 Nights"
+duration:"5D / 4N",
+highlights:"🌸 Cherry Blossoms • 🏯 Temples • 🍜 Cuisine"
 },
 {
 name:"Singapore",
 price:"₱35,000",
-desc:"Modern city adventure.",
+desc:"Explore the futuristic city with world-class attractions.",
 img:"https://images.unsplash.com/photo-1508962914676-134849a727f0",
-duration:"4 Days / 3 Nights"
+duration:"4D / 3N",
+highlights:"🏙️ City Tour • 🎡 Marina Bay • 🌳 Gardens"
 },
 {
 name:"Boracay",
 price:"₱15,000",
-desc:"White sand paradise.",
+desc:"Relax on pristine white sand beaches and crystal waters.",
 img:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-duration:"3 Days / 2 Nights"
+duration:"3D / 2N",
+highlights:"🏖️ White Beach • 🤿 Diving • 🌅 Sunset"
 },
 {
 name:"Palawan",
 price:"₱18,000",
-desc:"Island hopping tours.",
+desc:"Discover hidden lagoons and stunning island landscapes.",
 img:"https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-duration:"4 Days / 3 Nights"
+duration:"4D / 3N",
+highlights:"🏝️ Island Hopping • 🛶 Kayaking • 🐠 Snorkeling"
 },
 {
 name:"South Korea",
 price:"₱40,000",
-desc:"K-culture experience.",
+desc:"Immerse yourself in K-culture, palaces, and vibrant cities.",
 img:"https://images.unsplash.com/photo-1504674900247-0877df9cc836",
-duration:"5 Days / 4 Nights"
+duration:"5D / 4N",
+highlights:"🏰 Palaces • 🛍️ Shopping • 🍲 K-Food"
 },
 {
 name:"Thailand",
 price:"₱28,000",
-desc:"Temples and beaches.",
+desc:"Visit golden temples, tropical beaches, and bustling markets.",
 img:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-duration:"4 Days / 3 Nights"
+duration:"4D / 3N",
+highlights:"🛕 Temples • 🏝️ Islands • 🍜 Street Food"
 }
 ];
 
-/* RENDER DESTINATIONS */
+/* RENDER DESTINATIONS WITH ENHANCED CARDS */
 function renderDestinations(){
 const grid = document.getElementById("destinationGrid");
 grid.innerHTML = destinations.map((dest, index) => `
-<div class="group bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
+<div class="destination-card bg-white rounded-3xl shadow-xl overflow-hidden"
 data-aos="fade-up"
-data-aos-delay="${index * 100}">
+data-aos-delay="${index * 100}"
+data-aos-duration="1000">
 
-<div class="relative overflow-hidden">
+<div class="relative overflow-hidden h-72">
 <img src="${dest.img}" 
 alt="${dest.name} travel destination"
-class="h-64 w-full object-cover group-hover:scale-110 transition-transform duration-500"
+class="w-full h-full object-cover transition-transform duration-700"
 loading="lazy">
-<div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
-${dest.duration}
+
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+
+<div class="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-bold text-gray-800 shadow-lg">
+⏱️ ${dest.duration}
+</div>
+
+<div class="absolute bottom-4 left-4 right-4">
+<h3 class="text-3xl font-extrabold text-white mb-1 drop-shadow-lg">${dest.name}</h3>
 </div>
 </div>
 
 <div class="p-6">
-<h3 class="text-2xl font-bold mb-2 group-hover:text-blue-600 transition">${dest.name}</h3>
-<p class="text-gray-600 dark:text-gray-400 mb-4">${dest.desc}</p>
+<p class="text-gray-600 mb-4 leading-relaxed">${dest.desc}</p>
+
+<div class="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-xl mb-4">
+<p class="text-sm text-gray-700 font-medium">${dest.highlights}</p>
+</div>
 
 <div class="flex items-center justify-between">
-<div class="text-2xl font-bold text-blue-600">${dest.price}</div>
+<div>
+<p class="text-sm text-gray-500 mb-1">Starting from</p>
+<div class="text-3xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">${dest.price}</div>
+</div>
 <button onclick="bookDestination('${dest.name}')"
-class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition transform hover:scale-105">
+class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
 Book Now
 </button>
 </div>
@@ -615,9 +811,9 @@ Book Now
 
 /* BOOKING FUNCTION */
 function bookDestination(destination){
-const message = `Hi! I'm interested in booking a trip to ${destination}. Can you provide more details?`;
+const message = `Hi! I'm interested in booking a trip to ${destination}. Can you provide more details about the package?`;
 const whatsappUrl = `https://wa.me/639603384925?text=${encodeURIComponent(message)}`;
-window.open(whatsappUrl, '_blank');
+window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
 }
 
 // Initialize destinations on page load
@@ -629,12 +825,22 @@ anchor.addEventListener('click', function (e) {
 e.preventDefault();
 const target = document.querySelector(this.getAttribute('href'));
 if (target) {
-target.scrollIntoView({
-behavior: 'smooth',
-block: 'start'
+const offsetTop = target.offsetTop - 80;
+window.scrollTo({
+top: offsetTop,
+behavior: 'smooth'
 });
 }
 });
+});
+
+/* PARALLAX EFFECT FOR HERO */
+window.addEventListener('scroll', () => {
+const scrolled = window.scrollY;
+const hero = document.querySelector('.hero-video');
+if (hero) {
+hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+}
 });
 </script>
 
