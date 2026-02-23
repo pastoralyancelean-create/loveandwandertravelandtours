@@ -1,189 +1,150 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Love and WandeR Travel and Tours</title>
+<title>Love & Wander Travel</title>
 
+<!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- AOS Animation -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
 <style>
 body{
-font-family: 'Space Grotesk', sans-serif;
-}
-
-.glass{
-background: rgba(255,255,255,0.7);
-backdrop-filter: blur(12px);
-border:1px solid rgba(255,255,255,0.3);
-}
-
-.hero-bg{
-background:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e") center/cover;
-}
-
-.card:hover{
-transform: translateY(-8px);
+scroll-behavior:smooth;
 }
 </style>
+
 </head>
 
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
 
-<!-- HEADER -->
-<header class="fixed top-0 left-0 w-full z-50 p-4">
-<nav class="max-w-6xl mx-auto glass rounded-2xl px-6 py-3 flex justify-between items-center shadow-lg">
-<h2 class="font-bold text-xl">Love and WandeR ✈️</h2>
+<!-- Navbar -->
+<header class="fixed w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur z-50">
+<div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+<h1 class="font-bold text-xl">Love & Wander</h1>
 
-<div class="hidden md:flex gap-6 font-semibold">
+<nav class="space-x-6 text-sm font-semibold">
 <a href="#home">Home</a>
-<a href="#services">Services</a>
 <a href="#destinations">Destinations</a>
 <a href="#contact">Contact</a>
-</div>
-
-<button onclick="toggleMenu()" class="md:hidden">
-<i data-lucide="menu"></i>
-</button>
 </nav>
-
-<div id="mobileMenu" class="hidden glass rounded-2xl p-4 mt-2 max-w-6xl mx-auto">
-<a href="#home" class="block py-2">Home</a>
-<a href="#services" class="block py-2">Services</a>
-<a href="#destinations" class="block py-2">Destinations</a>
-<a href="#contact" class="block py-2">Contact</a>
 </div>
 </header>
 
-<!-- HERO -->
-<section id="home" class="hero-bg min-h-screen flex items-center justify-center text-center text-white pt-24">
-<div>
-<h1 class="text-5xl md:text-7xl font-bold mb-6">Explore the World</h1>
-<p class="text-xl mb-6">Your Trusted Travel Partner</p>
-<a href="#contact" class="bg-blue-600 px-8 py-4 rounded-xl font-bold">Book Now</a>
-</div>
+<!-- Hero -->
+<section id="home" class="pt-32 pb-20 text-center">
+<h2 class="text-5xl font-bold mb-6" data-aos="fade-up">
+Explore The World
+</h2>
+<p class="opacity-70 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+Travel with us and discover beautiful places around the world.
+</p>
 </section>
 
-<!-- SERVICES -->
-<section id="services" class="py-24">
+<!-- Destinations -->
+<section id="destinations" class="py-20">
 <div class="max-w-6xl mx-auto px-6">
-<h2 class="text-4xl font-bold text-center mb-16">Our Services</h2>
 
-<div class="grid md:grid-cols-3 gap-8">
-
-<div class="bg-white p-8 rounded-2xl shadow card">
-<h3 class="font-bold text-xl mb-3">International & Domestic Ticketing</h3>
-<p>Affordable airline tickets worldwide.</p>
+<div class="mb-12 text-center">
+<h2 class="text-4xl font-bold mb-4" data-aos="fade-up">
+Popular Destinations
+</h2>
+<p class="opacity-60" data-aos="fade-up" data-aos-delay="200">
+Click a destination to reveal the price
+</p>
 </div>
 
-<div class="bg-white p-8 rounded-2xl shadow card">
-<h3 class="font-bold text-xl mb-3">Visa Assistance</h3>
-<p>Fast visa processing support.</p>
-</div>
-
-<div class="bg-white p-8 rounded-2xl shadow card">
-<h3 class="font-bold text-xl mb-3">Passport Processing</h3>
-<p>Help with passport application.</p>
-</div>
-
-<div class="bg-white p-8 rounded-2xl shadow card">
-<h3 class="font-bold text-xl mb-3">Hotel & Resort Booking</h3>
-<p>Best hotels and vacation stays.</p>
-</div>
-
-<div class="bg-white p-8 rounded-2xl shadow card">
-<h3 class="font-bold text-xl mb-3">Travel Insurance</h3>
-<p>Secure and safe travel coverage.</p>
-</div>
-
-<div class="bg-white p-8 rounded-2xl shadow card">
-<h3 class="font-bold text-xl mb-3">Tour Packages & Ferry Tickets</h3>
-<p>Complete travel experiences.</p>
-</div>
-
-</div>
-</div>
-</section>
-
-<!-- DESTINATIONS -->
-<section id="destinations" class="py-24 bg-gray-100">
-<div class="max-w-6xl mx-auto px-6">
-<h2 class="text-4xl font-bold text-center mb-16">Popular Destinations</h2>
-
-<div class="grid md:grid-cols-4 gap-6">
-
-<div class="bg-white rounded-2xl overflow-hidden shadow">
-<img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4">
-<div class="p-4">
-<h3 class="font-bold">Japan</h3>
-</div>
-</div>
-
-<div class="bg-white rounded-2xl overflow-hidden shadow">
-<img src="https://images.unsplash.com/photo-1526481280691-781ce72f8d5e">
-<div class="p-4">
-<h3 class="font-bold">Singapore</h3>
-</div>
-</div>
-
-<div class="bg-white rounded-2xl overflow-hidden shadow">
-<img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07">
-<div class="p-4">
-<h3 class="font-bold">Cebu</h3>
-</div>
-</div>
-
-<div class="bg-white rounded-2xl overflow-hidden shadow">
-<img src="https://images.unsplash.com/photo-1518684079-3c830dcef090">
-<div class="p-4">
-<h3 class="font-bold">Palawan</h3>
-</div>
-</div>
-
-</div>
-</div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="py-24 bg-slate-900 text-white">
-<div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12">
-
-<div>
-<h2 class="text-5xl font-bold mb-8">Contact Us</h2>
-
-<p class="mb-4"><strong>General Manager:</strong> Love Pastoral</p>
-<p class="mb-4"><strong>Location:</strong> GF Skyport Hotel, NAIA Road, Parañaque City</p>
-<p class="mb-4"><strong>Email:</strong> loveandwander2@gmail.com</p>
-<p class="mb-4"><strong>Mobile:</strong> +63960-338-4925</p>
-<p class="mb-4"><strong>LAN:</strong> 8-772-8272</p>
-
-</div>
-
-<div class="bg-white text-black p-8 rounded-2xl">
-<h3 class="text-2xl font-bold mb-4">Send Message</h3>
-
-<input type="text" placeholder="Name" class="w-full p-3 border mb-3">
-<input type="email" placeholder="Email" class="w-full p-3 border mb-3">
-<textarea placeholder="Message" class="w-full p-3 border mb-3"></textarea>
-
-<button class="bg-blue-600 text-white w-full p-3 rounded-xl">Send</button>
-</div>
+<div id="destinationGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
 
 </div>
 </section>
 
-<footer class="text-center py-6 bg-black text-white">
-© 2026 Love and WandeR Travel and Tours
+<!-- Contact / Footer -->
+<footer id="contact" class="py-14 text-center bg-gray-100 dark:bg-slate-800">
+
+<h3 class="text-xl font-bold mb-3">Contact Us</h3>
+
+<p class="mb-4 font-semibold">
+Telephone: 0912-345-6789
+</p>
+
+<a href="https://www.facebook.com/loveandwander30" target="_blank"
+class="text-blue-600 font-semibold hover:underline block mb-4">
+Visit our Facebook Page
+</a>
+
+<p class="opacity-60">
+© 2026 Love & Wander Travel
+</p>
+
 </footer>
 
-<script>
-lucide.createIcons();
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
-function toggleMenu(){
-document.getElementById("mobileMenu").classList.toggle("hidden");
+<script>
+AOS.init();
+
+const destinations = [
+{
+name: "Japan",
+price: "₱00000",
+desc: "Cherry blossoms and modern cities.",
+img: "https://images.unsplash.com/photo-1549693578-d683be217e58"
+},
+{
+name: "Singapore",
+price: "₱00000",
+desc: "Luxury and futuristic attractions.",
+img: "https://images.unsplash.com/photo-1508962914676-134849a727f0"
+},
+{
+name: "Boracay",
+price: "₱00000",
+desc: "Famous white sand beaches.",
+img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
+},
+{
+name: "Palawan",
+price: "₱00000",
+desc: "Island hopping adventure.",
+img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb"
+},
+{
+name: "South Korea",
+price: "₱00000",
+desc: "K-culture and amazing food.",
+img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836"
+},
+{
+name: "Thailand",
+price: "₱00000",
+desc: "Temples and tropical travel.",
+img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
 }
+];
+
+document.getElementById("destinationGrid").innerHTML =
+destinations.map((x,i)=>`
+<div data-aos="fade-up" data-aos-delay="${i*100}"
+onclick="this.querySelector('.price').classList.toggle('hidden')"
+class="bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition">
+
+<img src="${x.img}" class="h-56 w-full object-cover">
+
+<div class="p-6">
+<h3 class="text-xl font-bold mb-2">${x.name}</h3>
+<p class="text-sm opacity-60 mb-4">${x.desc}</p>
+
+<div class="price hidden bg-blue-600 text-white p-3 rounded-xl text-center font-bold">
+Travel Price: ${x.price}
+</div>
+
+</div>
+</div>
+`).join("");
 </script>
 
 </body>
