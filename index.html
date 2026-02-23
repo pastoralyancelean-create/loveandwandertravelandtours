@@ -3,12 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Love and WandeR Travel and Tours - Explore amazing destinations worldwide with our curated travel packages">
+<meta name="keywords" content="travel, tours, vacation, destinations, Philippines, Asia travel">
 <title>Love and WandeR Travel and Tours</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<link rel="preconnect" href="https://images.unsplash.com">
 
 <style>
+*{
+box-sizing:border-box;
+}
+
 body{
 scroll-behavior:smooth;
 }
@@ -22,10 +29,11 @@ width:100%;
 height:100%;
 object-fit:cover;
 z-index:-2;
+filter:brightness(0.7);
 }
 
 .hero-overlay{
-background:rgba(0,0,0,0.5);
+background:linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
 position:absolute;
 top:0;
 left:0;
@@ -33,38 +41,117 @@ width:100%;
 height:100%;
 z-index:-1;
 }
+
+/* SMOOTH TRANSITIONS */
+a{
+transition:all 0.3s ease;
+}
+
+a:hover{
+color:#2563eb;
+}
+
+/* LOADING SKELETON */
+.skeleton{
+background:linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+background-size:200% 100%;
+animation:loading 1.5s infinite;
+}
+
+@keyframes loading{
+0%{background-position:200% 0;}
+100%{background-position:-200% 0;}
+}
+
+/* SCROLL TO TOP BUTTON */
+.scroll-top{
+position:fixed;
+bottom:2rem;
+right:2rem;
+background:#2563eb;
+color:white;
+width:3rem;
+height:3rem;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+opacity:0;
+visibility:hidden;
+transition:all 0.3s ease;
+z-index:100;
+box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
+
+.scroll-top.visible{
+opacity:1;
+visibility:visible;
+}
+
+.scroll-top:hover{
+transform:translateY(-5px);
+box-shadow:0 6px 16px rgba(0,0,0,0.3);
+}
+
+/* ENHANCED GALLERY HOVER */
+.gallery-item{
+position:relative;
+overflow:hidden;
+}
+
+.gallery-item::after{
+content:'';
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(37,99,235,0.3);
+opacity:0;
+transition:opacity 0.3s ease;
+}
+
+.gallery-item:hover::after{
+opacity:1;
+}
 </style>
 </head>
 
 <body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-white transition">
 
 <!-- NAVBAR -->
-<header class="fixed w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur z-50 shadow">
+<header class="fixed w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md z-50 shadow-md transition-all duration-300" id="navbar">
 <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
 <div class="flex items-center gap-3">
-<img src="logo.jpg" class="w-10 h-10 rounded-full object-cover">
-<h1 class="font-bold">Love and WandeR Travel and Tours</h1>
+<img src="logo.jpg" alt="Love and WandeR Logo" class="w-10 h-10 rounded-full object-cover" loading="lazy">
+<h1 class="font-bold text-lg md:text-xl">Love and WandeR Travel and Tours</h1>
 </div>
 
 <!-- DESKTOP MENU -->
-<nav class="hidden md:flex gap-8 font-semibold">
-<a href="#home">Home</a>
-<a href="#destinations">Destinations</a>
-<a href="#gallery">Gallery</a>
-<a href="#contact">Contact</a>
+<nav class="hidden md:flex gap-8 font-semibold" aria-label="Main navigation">
+<a href="#home" class="hover:text-blue-600">Home</a>
+<a href="#destinations" class="hover:text-blue-600">Destinations</a>
+<a href="#gallery" class="hover:text-blue-600">Gallery</a>
+<a href="#contact" class="hover:text-blue-600">Contact</a>
 </nav>
 
 <div class="flex items-center gap-3">
 
 <!-- DARK MODE -->
-<button onclick="toggleDarkMode()"
-class="bg-slate-200 dark:bg-slate-700 px-3 py-2 rounded-lg">
-🌙
+<button onclick="toggleDarkMode()" 
+aria-label="Toggle dark mode"
+class="bg-slate-200 dark:bg-slate-700 px-3 py-2 rounded-lg hover:scale-110 transition">
+<span id="darkModeIcon">🌙</span>
 </button>
 
 <!-- MOBILE MENU BUTTON -->
-<button onclick="toggleMenu()" class="md:hidden text-2xl">
+<button onclick="toggleMenu()" 
+aria-label="Toggle mobile menu"
+aria-expanded="false"
+id="menuButton"
+class="md:hidden text-2xl hover:text-blue-600 transition">
 ☰
 </button>
 
@@ -72,42 +159,57 @@ class="bg-slate-200 dark:bg-slate-700 px-3 py-2 rounded-lg">
 </div>
 
 <!-- MOBILE MENU -->
-<div id="mobileMenu"
-class="hidden md:hidden bg-white dark:bg-slate-900 px-6 pb-4 space-y-3">
-<a href="#home" class="block">Home</a>
-<a href="#destinations" class="block">Destinations</a>
-<a href="#gallery" class="block">Gallery</a>
-<a href="#contact" class="block">Contact</a>
-</div>
+<nav id="mobileMenu"
+class="hidden md:hidden bg-white dark:bg-slate-900 px-6 pb-4 space-y-3"
+aria-label="Mobile navigation">
+<a href="#home" class="block py-2 hover:text-blue-600" onclick="toggleMenu()">Home</a>
+<a href="#destinations" class="block py-2 hover:text-blue-600" onclick="toggleMenu()">Destinations</a>
+<a href="#gallery" class="block py-2 hover:text-blue-600" onclick="toggleMenu()">Gallery</a>
+<a href="#contact" class="block py-2 hover:text-blue-600" onclick="toggleMenu()">Contact</a>
+</nav>
 
 </header>
 
 <!-- HERO VIDEO -->
-<section id="home" class="relative pt-40 pb-40 text-center text-white">
+<section id="home" class="relative pt-40 pb-40 text-center text-white min-h-screen flex items-center justify-center">
 
-<video autoplay muted loop class="hero-video">
+<video autoplay muted loop playsinline class="hero-video" aria-hidden="true">
 <source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-tropical-island-5175/1080p.mp4" type="video/mp4">
+Your browser does not support the video tag.
 </video>
 
-<div class="hero-overlay"></div>
+<div class="hero-overlay" aria-hidden="true"></div>
 
-<h2 class="text-5xl md:text-6xl font-bold mb-6" data-aos="fade-up">
+<div class="relative z-10 px-6">
+<h2 class="text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg" data-aos="fade-up">
 Explore The World
 </h2>
 
-<p class="max-w-2xl mx-auto text-lg opacity-90" data-aos="fade-up" data-aos-delay="200">
-Travel with Love and WandeR and discover amazing destinations.
+<p class="max-w-2xl mx-auto text-lg md:text-xl opacity-90 mb-8 drop-shadow" data-aos="fade-up" data-aos-delay="200">
+Travel with Love and WandeR and discover amazing destinations around the globe.
 </p>
+
+<a href="#destinations" 
+class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:scale-105 transition"
+data-aos="fade-up" 
+data-aos-delay="400">
+Start Your Journey
+</a>
+</div>
 
 </section>
 
 <!-- DESTINATIONS -->
-<section id="destinations" class="py-24">
+<section id="destinations" class="py-24 bg-gradient-to-b from-white to-gray-50 dark:from-slate-950 dark:to-slate-900">
 <div class="max-w-7xl mx-auto px-6">
 
-<h2 class="text-4xl font-bold text-center mb-16">
+<h2 class="text-4xl md:text-5xl font-bold text-center mb-4" data-aos="fade-up">
 Popular Destinations
 </h2>
+
+<p class="text-center text-gray-600 dark:text-gray-400 mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+Handpicked destinations for your next adventure. Book now and create unforgettable memories.
+</p>
 
 <div id="destinationGrid"
 class="grid md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
@@ -119,29 +221,57 @@ class="grid md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
 <section id="gallery" class="py-24 bg-gray-100 dark:bg-slate-900">
 <div class="max-w-7xl mx-auto px-6">
 
-<h2 class="text-4xl font-bold text-center mb-16">
+<h2 class="text-4xl md:text-5xl font-bold text-center mb-4" data-aos="fade-up">
 Travel Gallery
 </h2>
 
+<p class="text-center text-gray-600 dark:text-gray-400 mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+Captured moments from our travelers' incredible journeys around the world.
+</p>
+
 <div class="grid md:grid-cols-3 gap-6">
 
+<div class="gallery-item rounded-2xl overflow-hidden shadow-lg" data-aos="zoom-in">
 <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
-class="rounded-2xl hover:scale-105 transition shadow-lg">
+alt="Beach paradise with crystal clear water"
+class="w-full h-64 object-cover hover:scale-110 transition duration-500"
+loading="lazy">
+</div>
 
+<div class="gallery-item rounded-2xl overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-delay="100">
 <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98"
-class="rounded-2xl hover:scale-105 transition shadow-lg">
+alt="Mountain landscape view"
+class="w-full h-64 object-cover hover:scale-110 transition duration-500"
+loading="lazy">
+</div>
 
+<div class="gallery-item rounded-2xl overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-delay="200">
 <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470"
-class="rounded-2xl hover:scale-105 transition shadow-lg">
+alt="Scenic nature trail"
+class="w-full h-64 object-cover hover:scale-110 transition duration-500"
+loading="lazy">
+</div>
 
+<div class="gallery-item rounded-2xl overflow-hidden shadow-lg" data-aos="zoom-in">
 <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429"
-class="rounded-2xl hover:scale-105 transition shadow-lg">
+alt="Tropical island getaway"
+class="w-full h-64 object-cover hover:scale-110 transition duration-500"
+loading="lazy">
+</div>
 
+<div class="gallery-item rounded-2xl overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-delay="100">
 <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
-class="rounded-2xl hover:scale-105 transition shadow-lg">
+alt="Sunset beach view"
+class="w-full h-64 object-cover hover:scale-110 transition duration-500"
+loading="lazy">
+</div>
 
+<div class="gallery-item rounded-2xl overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-delay="200">
 <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800"
-class="rounded-2xl hover:scale-105 transition shadow-lg">
+alt="Adventure travel destination"
+class="w-full h-64 object-cover hover:scale-110 transition duration-500"
+loading="lazy">
+</div>
 
 </div>
 
@@ -149,59 +279,84 @@ class="rounded-2xl hover:scale-105 transition shadow-lg">
 </section>
 
 <!-- CONTACT WITH EXACT MAP -->
-<section id="contact" class="py-24">
+<section id="contact" class="py-24 bg-gradient-to-b from-white to-blue-50 dark:from-slate-950 dark:to-slate-900">
 <div class="max-w-7xl mx-auto px-6">
 
-<h2 class="text-4xl font-bold text-center mb-12">
+<h2 class="text-4xl md:text-5xl font-bold text-center mb-4" data-aos="fade-up">
 Contact Us
 </h2>
 
+<p class="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+Ready to start your adventure? Get in touch with us today!
+</p>
+
 <div class="grid md:grid-cols-2 gap-10">
 
-<div class="space-y-4 text-lg">
-<p>📍 GF Skyport Hotel, NAIA Road, Parañaque City</p>
+<div class="space-y-6" data-aos="fade-right">
 
-<p>
-📧 Email:
+<div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
+<p class="flex items-start gap-3 text-lg">
+<span class="text-2xl">📍</span>
+<span>GF Skyport Hotel, NAIA Road, Parañaque City</span>
+</p>
+</div>
+
+<div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
+<p class="flex items-center gap-3 text-lg">
+<span class="text-2xl">📧</span>
+<span>
 <a href="mailto:loveandwander2@gmail.com"
 class="text-blue-600 hover:underline">
 loveandwander2@gmail.com
 </a>
+</span>
 </p>
+</div>
 
-<p>
-📞 Phone:
+<div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
+<p class="flex items-center gap-3 text-lg">
+<span class="text-2xl">📞</span>
+<span>
 <a href="tel:+639603384925"
 class="text-blue-600 hover:underline">
 +63 960-338-4925
 </a>
+</span>
 </p>
+</div>
 
-<p class="font-semibold">
-☎ Telephone:
+<div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
+<p class="flex items-center gap-3 text-lg font-semibold">
+<span class="text-2xl">☎</span>
+<span>
 <a href="tel:87728272"
 class="text-blue-600 hover:underline">
 8-772-8272
 </a>
+</span>
 </p>
+</div>
 
 <a href="https://www.facebook.com/loveandwander30"
 target="_blank"
-class="inline-block mt-4 bg-blue-600 text-white px-6 py-3 rounded-xl hover:scale-105 transition">
+rel="noopener noreferrer"
+class="inline-flex items-center justify-center gap-2 w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-xl font-semibold shadow-lg hover:scale-105 transition">
+<span class="text-xl">📘</span>
 Visit our Facebook Page
 </a>
 
 </div>
 
 <!-- EXACT GOOGLE MAP -->
-<div class="rounded-3xl overflow-hidden shadow-2xl">
+<div class="rounded-3xl overflow-hidden shadow-2xl" data-aos="fade-left">
 <iframe
 src="https://www.google.com/maps?q=14.5207,120.9920&z=17&output=embed"
 width="100%"
-height="350"
+height="500"
 style="border:0;"
 loading="lazy"
-allowfullscreen>
+allowfullscreen
+title="Love and WandeR Office Location">
 </iframe>
 </div>
 
@@ -211,11 +366,24 @@ allowfullscreen>
 </section>
 
 <!-- FOOTER -->
-<footer class="py-10 text-center bg-slate-100 dark:bg-slate-950">
-<p class="opacity-70">
-© 2026 Love and WandeR Travel and Tours
+<footer class="py-10 text-center bg-slate-100 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-6">
+<p class="opacity-70 mb-2">
+© 2026 Love and WandeR Travel and Tours. All rights reserved.
 </p>
+<p class="text-sm opacity-60">
+Made with ❤️ for travelers worldwide
+</p>
+</div>
 </footer>
+
+<!-- SCROLL TO TOP BUTTON -->
+<button onclick="scrollToTop()" 
+id="scrollTopBtn" 
+class="scroll-top"
+aria-label="Scroll to top">
+↑
+</button>
 
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
@@ -290,6 +458,184 @@ Travel Price: ${x.price}
 
 </div>
 `).join("");
+</script>
+
+</body>
+</html>
+
+<script>
+// Initialize AOS animations
+AOS.init({
+duration: 800,
+once: true,
+offset: 100
+});
+
+/* DARK MODE WITH PERSISTENCE */
+function toggleDarkMode(){
+const html = document.documentElement;
+const isDark = html.classList.toggle("dark");
+localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+
+// Update icon
+const icon = document.getElementById('darkModeIcon');
+icon.textContent = isDark ? '☀️' : '🌙';
+}
+
+// Load dark mode preference
+window.addEventListener('DOMContentLoaded', () => {
+const darkMode = localStorage.getItem('darkMode');
+if (darkMode === 'enabled') {
+document.documentElement.classList.add('dark');
+document.getElementById('darkModeIcon').textContent = '☀️';
+}
+});
+
+/* MOBILE MENU */
+function toggleMenu(){
+const menu = document.getElementById("mobileMenu");
+const button = document.getElementById("menuButton");
+const isHidden = menu.classList.toggle("hidden");
+button.setAttribute('aria-expanded', !isHidden);
+}
+
+/* SCROLL TO TOP */
+function scrollToTop(){
+window.scrollTo({
+top: 0,
+behavior: 'smooth'
+});
+}
+
+// Show/hide scroll to top button
+window.addEventListener('scroll', () => {
+const scrollBtn = document.getElementById('scrollTopBtn');
+if (window.scrollY > 300) {
+scrollBtn.classList.add('visible');
+} else {
+scrollBtn.classList.remove('visible');
+}
+});
+
+/* NAVBAR SCROLL EFFECT */
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+const navbar = document.getElementById('navbar');
+const currentScroll = window.scrollY;
+
+if (currentScroll > 100) {
+navbar.classList.add('shadow-xl');
+} else {
+navbar.classList.remove('shadow-xl');
+}
+
+lastScroll = currentScroll;
+});
+
+/* DESTINATIONS DATA */
+const destinations = [
+{
+name:"Japan",
+price:"₱45,000",
+desc:"Cherry blossoms and culture.",
+img:"https://images.unsplash.com/photo-1549693578-d683be217e58",
+duration:"5 Days / 4 Nights"
+},
+{
+name:"Singapore",
+price:"₱35,000",
+desc:"Modern city adventure.",
+img:"https://images.unsplash.com/photo-1508962914676-134849a727f0",
+duration:"4 Days / 3 Nights"
+},
+{
+name:"Boracay",
+price:"₱15,000",
+desc:"White sand paradise.",
+img:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+duration:"3 Days / 2 Nights"
+},
+{
+name:"Palawan",
+price:"₱18,000",
+desc:"Island hopping tours.",
+img:"https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+duration:"4 Days / 3 Nights"
+},
+{
+name:"South Korea",
+price:"₱40,000",
+desc:"K-culture experience.",
+img:"https://images.unsplash.com/photo-1504674900247-0877df9cc836",
+duration:"5 Days / 4 Nights"
+},
+{
+name:"Thailand",
+price:"₱28,000",
+desc:"Temples and beaches.",
+img:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
+duration:"4 Days / 3 Nights"
+}
+];
+
+/* RENDER DESTINATIONS */
+function renderDestinations(){
+const grid = document.getElementById("destinationGrid");
+grid.innerHTML = destinations.map((dest, index) => `
+<div class="group bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
+data-aos="fade-up"
+data-aos-delay="${index * 100}">
+
+<div class="relative overflow-hidden">
+<img src="${dest.img}" 
+alt="${dest.name} travel destination"
+class="h-64 w-full object-cover group-hover:scale-110 transition-transform duration-500"
+loading="lazy">
+<div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
+${dest.duration}
+</div>
+</div>
+
+<div class="p-6">
+<h3 class="text-2xl font-bold mb-2 group-hover:text-blue-600 transition">${dest.name}</h3>
+<p class="text-gray-600 dark:text-gray-400 mb-4">${dest.desc}</p>
+
+<div class="flex items-center justify-between">
+<div class="text-2xl font-bold text-blue-600">${dest.price}</div>
+<button onclick="bookDestination('${dest.name}')"
+class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition transform hover:scale-105">
+Book Now
+</button>
+</div>
+</div>
+
+</div>
+`).join("");
+}
+
+/* BOOKING FUNCTION */
+function bookDestination(destination){
+const message = `Hi! I'm interested in booking a trip to ${destination}. Can you provide more details?`;
+const whatsappUrl = `https://wa.me/639603384925?text=${encodeURIComponent(message)}`;
+window.open(whatsappUrl, '_blank');
+}
+
+// Initialize destinations on page load
+renderDestinations();
+
+/* SMOOTH SCROLL FOR ANCHOR LINKS */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function (e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+target.scrollIntoView({
+behavior: 'smooth',
+block: 'start'
+});
+}
+});
+});
 </script>
 
 </body>
