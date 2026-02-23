@@ -1,133 +1,190 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SkyEscape Travel</title>
-<link rel="stylesheet" href="style.css">
+<title>Love and WandeR Travel and Tours</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+body{
+font-family: 'Space Grotesk', sans-serif;
+}
+
+.glass{
+background: rgba(255,255,255,0.7);
+backdrop-filter: blur(12px);
+border:1px solid rgba(255,255,255,0.3);
+}
+
+.hero-bg{
+background:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e") center/cover;
+}
+
+.card:hover{
+transform: translateY(-8px);
+}
+</style>
 </head>
 
-<body>
+<body class="bg-gray-50 text-gray-900">
 
-<header>
-<h2>SkyEscape ✈️</h2>
+<!-- HEADER -->
+<header class="fixed top-0 left-0 w-full z-50 p-4">
+<nav class="max-w-6xl mx-auto glass rounded-2xl px-6 py-3 flex justify-between items-center shadow-lg">
+<h2 class="font-bold text-xl">Love and WandeR ✈️</h2>
 
-<nav>
+<div class="hidden md:flex gap-6 font-semibold">
 <a href="#home">Home</a>
+<a href="#services">Services</a>
 <a href="#destinations">Destinations</a>
-<a href="#booking">Book Flight</a>
 <a href="#contact">Contact</a>
-<a onclick="openLogin()">Login</a>
+</div>
+
+<button onclick="toggleMenu()" class="md:hidden">
+<i data-lucide="menu"></i>
+</button>
 </nav>
+
+<div id="mobileMenu" class="hidden glass rounded-2xl p-4 mt-2 max-w-6xl mx-auto">
+<a href="#home" class="block py-2">Home</a>
+<a href="#services" class="block py-2">Services</a>
+<a href="#destinations" class="block py-2">Destinations</a>
+<a href="#contact" class="block py-2">Contact</a>
+</div>
 </header>
 
 <!-- HERO -->
-<section id="home" class="hero">
-<h1>Explore The World</h1>
-<p>Airplane Booking + Tourist Adventures</p>
-<button onclick="scrollBooking()">Book Now</button>
+<section id="home" class="hero-bg min-h-screen flex items-center justify-center text-center text-white pt-24">
+<div>
+<h1 class="text-5xl md:text-7xl font-bold mb-6">Explore the World</h1>
+<p class="text-xl mb-6">Your Trusted Travel Partner</p>
+<a href="#contact" class="bg-blue-600 px-8 py-4 rounded-xl font-bold">Book Now</a>
+</div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="py-24">
+<div class="max-w-6xl mx-auto px-6">
+<h2 class="text-4xl font-bold text-center mb-16">Our Services</h2>
+
+<div class="grid md:grid-cols-3 gap-8">
+
+<div class="bg-white p-8 rounded-2xl shadow card">
+<h3 class="font-bold text-xl mb-3">International & Domestic Ticketing</h3>
+<p>Affordable airline tickets worldwide.</p>
+</div>
+
+<div class="bg-white p-8 rounded-2xl shadow card">
+<h3 class="font-bold text-xl mb-3">Visa Assistance</h3>
+<p>Fast visa processing support.</p>
+</div>
+
+<div class="bg-white p-8 rounded-2xl shadow card">
+<h3 class="font-bold text-xl mb-3">Passport Processing</h3>
+<p>Help with passport application.</p>
+</div>
+
+<div class="bg-white p-8 rounded-2xl shadow card">
+<h3 class="font-bold text-xl mb-3">Hotel & Resort Booking</h3>
+<p>Best hotels and vacation stays.</p>
+</div>
+
+<div class="bg-white p-8 rounded-2xl shadow card">
+<h3 class="font-bold text-xl mb-3">Travel Insurance</h3>
+<p>Secure and safe travel coverage.</p>
+</div>
+
+<div class="bg-white p-8 rounded-2xl shadow card">
+<h3 class="font-bold text-xl mb-3">Tour Packages & Ferry Tickets</h3>
+<p>Complete travel experiences.</p>
+</div>
+
+</div>
+</div>
 </section>
 
 <!-- DESTINATIONS -->
-<section id="destinations" class="section">
+<section id="destinations" class="py-24 bg-gray-100">
+<div class="max-w-6xl mx-auto px-6">
+<h2 class="text-4xl font-bold text-center mb-16">Popular Destinations</h2>
 
-<h2>Popular Destinations</h2>
+<div class="grid md:grid-cols-4 gap-6">
 
-<div class="cards">
-
-<div class="card">
+<div class="bg-white rounded-2xl overflow-hidden shadow">
 <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4">
-<h3>Japan</h3>
-<p>₱15,000</p>
+<div class="p-4">
+<h3 class="font-bold">Japan</h3>
+</div>
 </div>
 
-<div class="card">
+<div class="bg-white rounded-2xl overflow-hidden shadow">
 <img src="https://images.unsplash.com/photo-1526481280691-781ce72f8d5e">
-<h3>Singapore</h3>
-<p>₱8,000</p>
+<div class="p-4">
+<h3 class="font-bold">Singapore</h3>
+</div>
 </div>
 
-<div class="card">
+<div class="bg-white rounded-2xl overflow-hidden shadow">
 <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07">
-<h3>Cebu</h3>
-<p>₱3,500</p>
+<div class="p-4">
+<h3 class="font-bold">Cebu</h3>
+</div>
 </div>
 
-<div class="card">
+<div class="bg-white rounded-2xl overflow-hidden shadow">
 <img src="https://images.unsplash.com/photo-1518684079-3c830dcef090">
-<h3>Palawan</h3>
-<p>₱4,500</p>
+<div class="p-4">
+<h3 class="font-bold">Palawan</h3>
 </div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
-<h3>Maldives</h3>
-<p>₱20,000</p>
 </div>
 
 </div>
-
-</section>
-
-<!-- BOOKING -->
-<section id="booking" class="section">
-
-<h2>Book Flight</h2>
-
-<form id="bookingForm">
-
-<input type="text" placeholder="Full Name" required>
-
-<select id="destination">
-<option value="">Choose Destination</option>
-<option value="Cebu">Cebu</option>
-<option value="Singapore">Singapore</option>
-<option value="Japan">Japan</option>
-<option value="Palawan">Palawan</option>
-<option value="Maldives">Maldives</option>
-</select>
-
-<p id="priceDisplay">Price: ₱0</p>
-
-<button type="submit">Confirm Booking</button>
-
-</form>
-
+</div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="section">
+<section id="contact" class="py-24 bg-slate-900 text-white">
+<div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12">
 
-<h2>Contact Us</h2>
-<p>Email: skyescape@email.com</p>
+<div>
+<h2 class="text-5xl font-bold mb-8">Contact Us</h2>
 
-<iframe src="https://maps.google.com/maps?q=NAIA%20Airport&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+<p class="mb-4"><strong>General Manager:</strong> Love Pastoral</p>
+<p class="mb-4"><strong>Location:</strong> GF Skyport Hotel, NAIA Road, Parañaque City</p>
+<p class="mb-4"><strong>Email:</strong> loveandwander2@gmail.com</p>
+<p class="mb-4"><strong>Mobile:</strong> +63960-338-4925</p>
+<p class="mb-4"><strong>LAN:</strong> 8-772-8272</p>
 
+</div>
+
+<div class="bg-white text-black p-8 rounded-2xl">
+<h3 class="text-2xl font-bold mb-4">Send Message</h3>
+
+<input type="text" placeholder="Name" class="w-full p-3 border mb-3">
+<input type="email" placeholder="Email" class="w-full p-3 border mb-3">
+<textarea placeholder="Message" class="w-full p-3 border mb-3"></textarea>
+
+<button class="bg-blue-600 text-white w-full p-3 rounded-xl">Send</button>
+</div>
+
+</div>
 </section>
 
-<!-- LOGIN -->
-<div id="loginModal" class="modal">
+<footer class="text-center py-6 bg-black text-white">
+© 2026 Love and WandeR Travel and Tours
+</footer>
 
-<div class="modal-content">
+<script>
+lucide.createIcons();
 
-<span class="close" onclick="closeLogin()">×</span>
+function toggleMenu(){
+document.getElementById("mobileMenu").classList.toggle("hidden");
+}
+</script>
 
-<h2>Email Login</h2>
-
-<input type="email" id="emailInput" placeholder="Enter Email">
-<button onclick="sendOTP()">Send Code</button>
-
-<div id="otpSection">
-<input type="text" id="otpInput" placeholder="Enter Code">
-<button onclick="verifyOTP()">Login</button>
-</div>
-
-<p id="otpDisplay"></p>
-
-</div>
-</div>
-
-<script src="script.js"></script>
 </body>
 </html>
-
