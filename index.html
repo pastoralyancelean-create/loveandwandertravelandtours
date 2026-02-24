@@ -250,19 +250,49 @@ height:300px;
 /* FLYING AIRPLANE ANIMATION */
 .airplane{
 position:fixed;
-font-size:3rem;
+font-size:4rem;
 color:#ffffff;
 z-index:40;
 opacity:0;
 transform:translateX(-100px) rotate(-15deg);
-transition:all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+transition:all 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3));
 pointer-events:none;
+text-shadow:0 0 20px rgba(255,255,255,0.5);
 }
 
 .airplane.flying{
 opacity:1;
 transform:translateX(calc(100vw + 100px)) translateY(-50px) rotate(15deg);
+}
+
+.airplane.flying-up{
+opacity:1;
+transform:translateY(-120vh) rotate(-45deg) scale(1.2);
+animation:flyUpward 3s ease-out forwards;
+}
+
+@keyframes flyUpward{
+0%{
+opacity:0;
+transform:translateY(0) rotate(-45deg) scale(0.8);
+}
+20%{
+opacity:1;
+transform:translateY(-20vh) rotate(-35deg) scale(1);
+}
+50%{
+opacity:1;
+transform:translateY(-50vh) rotate(-40deg) scale(1.1);
+}
+80%{
+opacity:0.8;
+transform:translateY(-80vh) rotate(-45deg) scale(1.2);
+}
+100%{
+opacity:0;
+transform:translateY(-120vh) rotate(-50deg) scale(1.3);
+}
 }
 
 /* ENHANCED ICONS */
@@ -360,24 +390,6 @@ backdrop-filter:blur(20px);
 border-radius:0 0 2rem 2rem;
 box-shadow:0 10px 40px rgba(0,0,0,0.1);
 }
-
-/* SCROLL INDICATOR */
-.scroll-indicator{
-position:absolute;
-bottom:2rem;
-left:50%;
-transform:translateX(-50%);
-color:white;
-font-size:2rem;
-animation:bounce 2s infinite;
-opacity:0.8;
-}
-
-@keyframes bounce{
-0%, 20%, 50%, 80%, 100%{transform:translateX(-50%) translateY(0);}
-40%{transform:translateX(-50%) translateY(-10px);}
-60%{transform:translateX(-50%) translateY(-5px);}
-}
 </style>
 </head>
 
@@ -459,6 +471,10 @@ Your browser does not support the video tag.
 <!-- FLYING AIRPLANE -->
 <div id="flyingAirplane" class="airplane">✈️</div>
 
+<!-- ADDITIONAL FLYING AIRPLANES -->
+<div id="flyingAirplane2" class="airplane airplane-2">🛩️</div>
+<div id="flyingAirplane3" class="airplane airplane-3">✈️</div>
+
 <div class="relative z-10 px-6 max-w-5xl mx-auto">
 <div class="mb-6" data-aos="zoom-in" data-aos-duration="1000">
 <span class="inline-block bg-white/20 backdrop-blur-md px-6 py-3 rounded-full text-sm font-semibold tracking-wider border border-white/30 shadow-lg">
@@ -495,14 +511,6 @@ class="btn-glow relative inline-flex items-center gap-3 bg-white/20 backdrop-blu
 <span class="text-2xl">💬</span>
 Contact Us
 </a>
-</div>
-
-<!-- SCROLL INDICATOR -->
-<div class="scroll-indicator" data-aos="fade-up" data-aos-delay="800">
-<div class="flex flex-col items-center">
-<span class="text-sm mb-2 opacity-80">Scroll to explore</span>
-<span>⬇️</span>
-</div>
 </div>
 </div>
 
@@ -1028,18 +1036,27 @@ const airplane = document.getElementById('flyingAirplane');
 const heroHeight = window.innerHeight;
 
 // Trigger airplane when scrolling down from hero section
-if (scrolled > heroHeight * 0.3 && !airplaneTriggered) {
+if (scrolled > heroHeight * 0.2 && !airplaneTriggered) {
 airplaneTriggered = true;
-airplane.style.top = Math.random() * (window.innerHeight * 0.6) + window.innerHeight * 0.2 + 'px';
-airplane.classList.add('flying');
+
+// Random starting position from bottom
+const startY = window.innerHeight + 50;
+const endY = -100;
+const randomX = Math.random() * (window.innerWidth * 0.6) + window.innerWidth * 0.2;
+
+airplane.style.left = randomX + 'px';
+airplane.style.top = startY + 'px';
+airplane.style.transform = 'rotate(-45deg)';
+airplane.classList.add('flying-up');
 
 // Reset after animation completes
 setTimeout(() => {
-airplane.classList.remove('flying');
+airplane.classList.remove('flying-up');
+airplane.style.top = startY + 'px';
 setTimeout(() => {
 airplaneTriggered = false;
 }, 1000);
-}, 2000);
+}, 3000);
 }
 });
 </script>
